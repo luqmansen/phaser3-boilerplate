@@ -27,12 +27,11 @@ App.prototype.start = function ()
         height          : 640 / 2,
         scene           : scenes,
         pixelArt        : true,
-        backgroundColor : 0xFFFFFF
+        backgroundColor : '0xF4CCCB'
     }
 
     // Game app
     let game = new Phaser.Game(config)
-
     
     // Globals
     game.IS_DEV = this.IS_DEV;
