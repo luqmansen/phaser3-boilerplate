@@ -11,6 +11,7 @@ class Preload extends Phaser.Scene {
     }
 
     preload(){
+        this.createBackground();
         this.createLoadingBar()
 
         // Spritesheets
@@ -20,7 +21,7 @@ class Preload extends Phaser.Scene {
 
     create(){
         this.time.addEvent({
-            delay : 2000,
+            delay : 100,
             callback: () => {this.scene.start('Menu');},
             callbackScope : this
         });
@@ -58,17 +59,23 @@ class Preload extends Phaser.Scene {
 
     onProgress(value){
         let w = this.CONFIG.width - 2*this.progress.x;
-        let h = 18;
+        let h = 36;
 
         this.progress.clear();
         this.progress.fillStyle('0xFFFFFF', 1)
         this.progress.fillRect(0,0, w*value, h)
 
         this.border.clear()
-        this.border.lineStyle(2, '0x4D5699')
+        this.border.lineStyle(4, '0x4D5699')
         this.border.strokeRect(0,0, w*value, h);
 
         this.txt_progress.setText(Math.round(value * 100) + '%')
         console.log(this.txt_progress.text)
+    }
+
+    createBackground() {
+        this.bg = this.add.graphics({x: 0, y:0})
+        this.bg.fillStyle('0xF5CCA1',1)
+        this.bg.fillRect(0,0, this.CONFIG.width,this.CONFIG.height)
     }
 }

@@ -20,7 +20,7 @@ class PhaserText {
     initStyle(key){
         let style = {
             fontFamily  : 'ClickPixel',
-            fontsize    : 16,
+            fontsize    : 32,
             color       : '0xFFFFFF',
             align       : 'center'
         }
@@ -28,10 +28,10 @@ class PhaserText {
         switch (key.toLowerCase()) {
 
             case 'title':
-                style.fontsize = 32;
+                style.fontsize = 64;
                 break
             case 'preload':
-                style.fontsize = 24;
+                style.fontsize = 48;
                 break
         }
         return style

@@ -23,11 +23,11 @@ App.prototype.start = function ()
         parent          : 'phaser-app',
         title           : 'Wandering Chonk',
         url             : 'https://luqmansen.github.io/wandering-chonk',
-        width           : 360 / 2,
-        height          : 640 / 2,
+        width           : 360,
+        height          : 640,
         scene           : scenes,
         pixelArt        : true,
-        backgroundColor : '0xF4CCCB'
+        backgroundColor : '0x000000'
     }
 
     // Game app
@@ -44,7 +44,7 @@ App.prototype.start = function ()
         height : config.height,
         centerX : Math.round(0.5 * config.width),
         centerY : Math.round(0.5 * config.height),
-        tile : 16   
+        tile : 32
     }
 
     // Sound
