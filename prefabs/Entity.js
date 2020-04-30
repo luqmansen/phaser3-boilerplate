@@ -128,6 +128,36 @@ class Entity {
     }
 
     // Setters ================================================================
+    setSpritePos(x, y) {
+
+        if (typeof x === 'number') {
+            this.x = x
+        }
+
+        if (typeof y === 'number') {
+            this.y = y
+        }
+
+        this.spr.setX(this.x);
+        this.spr.setY(this.y);
+
+        if (this.shadow) {
+            this.shadow.setX(this.x);
+            this.shadow.setY(this.y);
+        }
+    }
+
+    setDepth(depth) {
+
+        this.depth = depth;
+
+        this.spr.setDepth(depth);
+
+        if (this.shadow) {
+            this.shadow.setDepth(depth);
+        }
+    }
+
 }
 
 
