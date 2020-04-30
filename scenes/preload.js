@@ -21,11 +21,7 @@ class Preload extends Phaser.Scene {
     }
 
     create(){
-        this.time.addEvent({
-            delay : 100,
-            callback: () => {this.scene.start('Menu');},
-            callbackScope : this
-        });
+        this.scene.start('Menu');
     }
 
     createLoadingBar(){

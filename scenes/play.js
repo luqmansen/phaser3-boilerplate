@@ -30,6 +30,10 @@ class Play extends Phaser.Scene{
     create(){
         // create floor
         this.generator.setup();
+
+        // player
+        this.createPlayer();
+
     }
 
     update(){
@@ -62,5 +66,15 @@ class Play extends Phaser.Scene{
             this.cam_speed.current,
             0
         )
+    }
+
+    createPlayer() {
+        this.player = new Entity(
+            this,
+            this.CONFIG.centerX,
+            this.CONFIG.centerY,
+            'spr-cat'
+        );
+        this.player.createSprite();
     }
 }
