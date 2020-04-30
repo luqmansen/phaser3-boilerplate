@@ -16,7 +16,8 @@ class Preload extends Phaser.Scene {
 
         // Spritesheets
         this.load.setPath(this.URL + 'assets/img')
-        this.load.spritesheet('spr-cat', 'spr-cat.png', {frameWidth:16, frameHeight:16,endFrame:4, margin: 1, spacing: 2})
+        this.load.spritesheet('tileset', 'Outz-A2.png', {frameWidth:32, frameHeight:32,endFrame:4, margin: 1, spacing: 2})
+        this.load.spritesheet('spr-cat', 'spr-cat.png', {frameWidth:32, frameHeight:32,endFrame:4, margin: 1, spacing: 2})
     }
 
     create(){
@@ -70,7 +71,6 @@ class Preload extends Phaser.Scene {
         this.border.strokeRect(0,0, w*value, h);
 
         this.txt_progress.setText(Math.round(value * 100) + '%')
-        console.log(this.txt_progress.text)
     }
 
     createBackground() {
