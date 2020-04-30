@@ -69,7 +69,7 @@ class Play extends Phaser.Scene{
     }
 
     createPlayer() {
-        this.player = new Entity(
+        this.player = new Player(
             this,
             this.CONFIG.centerX,
             this.CONFIG.centerY,
