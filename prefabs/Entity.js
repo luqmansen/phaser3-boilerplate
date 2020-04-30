@@ -130,13 +130,11 @@ class Entity {
     // Setters ================================================================
     setSpritePos(x, y) {
 
-        if (typeof x === 'number') {
-            this.x = x
-        }
+        if (typeof x === 'number') {this.x = x}
+        if (typeof y === 'number') {this.y = y}
 
-        if (typeof y === 'number') {
-            this.y = y
-        }
+        if (x >= this.ctx.CONFIG.width) {this.x = this.ctx.CONFIG.width - 5}
+        if (x <= 0) {this.x = 5}
 
         this.spr.setX(this.x);
         this.spr.setY(this.y);
