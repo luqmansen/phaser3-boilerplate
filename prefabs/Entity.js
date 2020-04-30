@@ -47,21 +47,25 @@ class Entity {
 
         // Tile  position
         //  Shadow
+        this.createShadow();
         // Sprite
+        this.createSprite();
     }
 
     // Sprite
     createSprite() {
-        if (this.spr) {
-            this.spr.destroy();
-        }
-
         this.spr = this.ctx.add.sprite(this.x, this.y, this.key);
         this.spr.setOrigin(0.5);
     }
 
-    updateSpriteDirection() {
+    destroy() {
+        if (this.spr) {
+            this.spr.destroy()
+        }
+        this.spr = false;
+    }
 
+    updateSpriteDirection() {
         switch (this.direction.current) {
             case "left":
                 this.spr.setAngle(90);
@@ -75,6 +79,23 @@ class Entity {
             default:
                 this.spr.setAngle(0);
         }
+    }
+
+    createShadow() {
+        this.shadow = this.ctx.add.graphics({x : this.x, y: this.y})
+
+        let alpha   = 0.4;
+        let radius  = 8;
+
+        this.shadow.fillStyle('0x000000', alpha);
+        this.shadow.fillCircle(0,0, radius)
+    }
+
+    destroyShadows() {
+        if (this.shadow) {
+            this.shadow.destroy()
+        }
+        this.shadow = false;
     }
 }
 
