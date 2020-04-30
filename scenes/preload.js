@@ -16,11 +16,13 @@ class Preload extends Phaser.Scene {
 
         // Spritesheets
         this.load.setPath(this.URL + 'assets/img')
-        this.load.spritesheet('tileset', 'Outz-A2.png', {frameWidth:32, frameHeight:32,endFrame:4, margin: 1, spacing: 2})
-        this.load.spritesheet('spr-cat', 'spr-cat.png', {frameWidth:32, frameHeight:32,endFrame:4, margin: 1, spacing: 2})
+        this.load.spritesheet('tileset', 'Outz-A2.png', {frameWidth:32, frameHeight:32,endFrame:4, margin: 2, spacing: 1})
+        this.load.spritesheet('spr-cat', 'spr-cat.png', {frameWidth:30, frameHeight:30,endFrame:2, margin: 2, spacing: 1})
     }
 
     create(){
+        this.createAllAnimations();
+
         this.scene.start('Menu');
     }
 
@@ -73,5 +75,16 @@ class Preload extends Phaser.Scene {
         this.bg = this.add.graphics({x: 0, y:0})
         this.bg.fillStyle('0xF5CCA1',1)
         this.bg.fillRect(0,0, this.CONFIG.width,this.CONFIG.height)
+    }
+
+    createAllAnimations() {
+        // Chonk walking
+        this.anims.create({
+            key: 'spr-cat-walk',
+            frames: this.anims.generateFrameNames('spr-cat', {frames :[0,1,0,2] }),
+            repeat: -1,
+            frameRate: 5
+        });
+
     }
 }

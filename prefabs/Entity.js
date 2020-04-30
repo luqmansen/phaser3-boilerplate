@@ -97,6 +97,35 @@ class Entity {
         }
         this.shadow = false;
     }
+
+    // Animations
+    startNewAnim(key) {
+        this.stopAnim();
+
+        switch (key) {
+            case 'idle':
+                this.startIdleAnim();
+                break;
+            case 'walk':
+                this.startWalkAnim();
+                break;
+            default:
+                console.log(this.key + 'INVALID ANIM KEY', key);
+        }
+    }
+
+    stopAnim() {
+        this.spr.anims.stop()
+        this.spr.setFrame(this.frames.idle)
+    }
+
+    startIdleAnim() {
+        this.spr.setFrame(this.frames.idle)
+    }
+
+    startWalkAnim() {
+        this.spr.play(this.key + '-walk')
+    }
 }
 
 

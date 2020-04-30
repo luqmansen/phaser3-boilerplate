@@ -75,5 +75,7 @@ class Play extends Phaser.Scene{
             this.CONFIG.centerY,
             'spr-cat'
         );
+
+        this.player.startNewAnim('walk')
     }
 }
