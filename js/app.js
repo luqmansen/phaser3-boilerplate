@@ -11,14 +11,14 @@ App.prototype.start = function ()
     'use strict'
     
 
-    // Scenes
+    // Scenes ================================================================
     let scenes = [];
     scenes.push(Boot);
     scenes.push(Preload);
     scenes.push(Menu);
     scenes.push(Play);
 
-    // Game config
+    // Game config ================================================================
     const config = {
         type            : Phaser.AUTO,
         parent          : 'phaser-app',
@@ -31,10 +31,10 @@ App.prototype.start = function ()
         backgroundColor : '0x000000'
     }
 
-    // Game app
+    // Game app ================================================================
     let game = new Phaser.Game(config)
     
-    // Globals
+    // Globals ================================================================
     game.IS_DEV = this.IS_DEV;
     game.VERSION = this.VERSION;
 
@@ -49,7 +49,7 @@ App.prototype.start = function ()
         map_offset  : 4
     }
 
-    // Sound
+    // Sound ================================================================
     game.sound_on = true;
 
 

@@ -23,12 +23,12 @@ class Generator{
     setup(){
         this.createFloor();
     }
-    // Update
+    // Update ================================================================
     update(){
         this.scrollFloor();
     }
 
-    // Floor layer
+    // Floor layer ================================================================
     createFloor() {
         let x;
         let y;

@@ -52,7 +52,7 @@ class Entity {
         this.createSprite();
     }
 
-    // Sprite
+    // Sprite ================================================================
     createSprite() {
         this.spr = this.ctx.add.sprite(this.x, this.y, this.key);
         this.spr.setOrigin(0.5);
@@ -98,7 +98,7 @@ class Entity {
         this.shadow = false;
     }
 
-    // Animations
+    // Animations ================================================================
     startNewAnim(key) {
         this.stopAnim();
 
@@ -126,6 +126,8 @@ class Entity {
     startWalkAnim() {
         this.spr.play(this.key + '-walk')
     }
+
+    // Setters ================================================================
 }
 
 
