@@ -156,6 +156,27 @@ class Entity {
         }
     }
 
+    setState(key){
+        if (!this.states.hasOwnProperty(key)){
+            console.log(this.key+ 'Invalid state');
+        }
+
+        if (this.states.last === key){
+            return;
+        }
+
+        this.resetStates();
+        this.states[key] = true;
+        this.states.last = key;
+
+    }
+
+    resetStates(){
+        for (let key in this.states){
+            this.states[key] = false;
+        }
+    }
+
 }
 
 

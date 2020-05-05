@@ -1,0 +1,26 @@
+{
+  "name": "wandering-chonk",
+  "version": "1.0.0",
+  "description": "HTML5 Based Game Built with Phaser3",
+  "main": "./assets/js/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luqmansen/wandering-chonk.git"
+  },
+  "author": "Luqman Setyo Nugroho <luqmansen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luqmansen/wandering-chonk/issues"
+  },
+  "homepage": "https://github.com/luqmansen/wandering-chonk#readme",
+  "dependencies": {
+    "phaser": "^3.23.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
