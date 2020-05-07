@@ -322,4 +322,27 @@ class Generator{
         }
     }
 
+    checkTileBlocked(tx, ty)
+    {
+         if (typeof tx === 'object')
+         {
+              ty = tx.tx
+              tx = tx.tx
+         }
+
+         // Check if outside grid, count is as wall
+         if (typeof this.layers.walls[ty] === "undefined")
+         {
+             return true
+         }
+         else if (typeof this.layers.walls[ty][tx] === "undefined" )
+         {
+             return true;
+         } 
+         // flagges as wall
+         else  {
+            return this.layers.walls[ty][tx].is_wall
+         }
+    }
+
 }

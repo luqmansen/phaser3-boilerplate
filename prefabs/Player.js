@@ -32,6 +32,7 @@ class Player extends Entity {
     this.setState('idle');
     this.startNewAnim('idle')
 }
+// MOVEMENT =====================================================
 
   moveSprite() {
     switch (this.direction.current) {
@@ -49,7 +50,7 @@ class Player extends Entity {
 
   moveDown(){
       this.y += this.speed.current;
-
+      this.handlerCollision('down')
       this.setSpritePos();
   }
 
@@ -63,6 +64,49 @@ class Player extends Entity {
         this.x += this.speed.current;
   
         this.setSpritePos();
+    }
+
+    handlerCollision(direction)
+    {
+
+      let tile1;
+      let tile2;
+      let now;
+      let corr;
+
+      switch (direction)
+      {
+        case 'down':
+          tile1 = this.getBottomLeftTile();
+          tile2 = this.getBottomRightTile();
+          now = this.helper.convertPxToTile(
+            this.x, this.getBottomY(), this.TILE_SIZE
+          );
+          // correction tile if player is running into a wall
+          corr = {
+            x : this.x,
+            y : this.helper.getTileCenter(
+              now.tx, now.ty -1, this.TILE_SIZE
+            ).y
+          }
+          break;
+        case 'right':
+          break;
+        case 'left':
+          break;
+          
+      }
+
+      // check if player collides
+      console.log(tile1)
+      let is_tile1_wall = this.ctx.generator.checkTileBlocked(tile1)
+      let is_tile2_wall = this.ctx.generator.checkTileBlocked(tile2)
+
+      if (is_tile1_wall || is_tile2_wall)
+      {
+        this.x = corr.x
+        this.y = corr.y
+      }
     }
 
 
