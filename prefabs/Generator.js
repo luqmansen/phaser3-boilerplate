@@ -51,9 +51,9 @@ class Generator{
     checkNewRoom()
     {
         // check camera has reach end
-        if(this.ctx.cameras.main.scrollY + this.ctx.cameras.height < this.height)
+        if(this.ctx.cameras.main.scrollY + this.ctx.cameras.main.height < this.height)
         {
-            this.return;
+            return;
         }
         // calculate y offset
         this.ty_offset = Math.floor(this.ctx.cameras.main.scrollY /this.CONFIG.tile)
