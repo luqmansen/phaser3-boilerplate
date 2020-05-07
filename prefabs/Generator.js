@@ -24,6 +24,12 @@ class Generator{
             floor : 0,
             walls : this.helper.getRadInt(156,158),
         }
+
+        this.ty_offset = 0;
+        this.px_offset = 0;
+
+        this.height = 0;
+
     }
 
     setup(){
@@ -32,7 +38,46 @@ class Generator{
     }
     // Update ================================================================
     update(){
+        this.checkNewRoom();
         this.scrollFloor();
+    }
+
+    saveHeight()
+    {
+        // total hegiht fo all the rooms (bottom edge of the room)
+        this.height = this.layers.walls.length * this.CONFIG.tile
+    }
+
+    checkNewRoom()
+    {
+        // check camera has reach end
+        if(this.ctx.cameras.main.scrollY + this.ctx.cameras.height < this.height)
+        {
+            this.return;
+        }
+        // calculate y offset
+        this.ty_offset = Math.floor(this.ctx.cameras.main.scrollY /this.CONFIG.tile)
+        this.px_offset = this.ctx.cameras.main.scrollY
+        // destroy old rows 
+        this.destroyPassedRows();
+
+        // append new room
+        this.createRoomLayers();
+    }
+
+    destroyPassedRows(){
+        let row_num = Math.floor(this.px_offset / this.CONFIG.tile)
+
+        for (let ty= 0; ty < row_num; ty++)
+        {
+            for (let tx = 0; tx < this.cols; tx++)
+            {
+                if (this.layers.walls[ty][tx].spr)
+                {
+                    this.layers.walls[ty][tx].spr.destroy();
+                }
+            }
+        }
     }
 
     createRoomLayers(){
@@ -43,6 +88,9 @@ class Generator{
         walls = this.createWalls(walls);
         // append to layer
         this.layers.walls = this.layers.walls.concat(walls)
+
+        //save total height fo all the rooms
+        this.saveHeight();
     }
 
     // Walls layer
