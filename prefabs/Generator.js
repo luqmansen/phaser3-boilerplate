@@ -3,6 +3,7 @@ class Generator{
     constructor(ctx) {
         this.CONFIG = ctx.CONFIG;
         this.DEPTH = ctx.DEPTH;
+        this.helper = new Helper()
 
 
         this.ctx = ctx;
@@ -18,15 +19,189 @@ class Generator{
             turrets : [],
             overlay : false
         };
+
+        this.frames = {
+            floor : 0,
+            walls : this.helper.getRadInt(156,158),
+        }
     }
 
     setup(){
         this.createFloor();
+        this.createRoomLayers();
     }
     // Update ================================================================
     update(){
         this.scrollFloor();
     }
+
+    createRoomLayers(){
+        //add walls
+        // generate
+        let walls = this.generateWalls();
+        // draw
+        walls = this.createWalls(walls);
+        // append to layer
+        this.layers.walls = this.layers.walls.concat(walls)
+    }
+
+    // Walls layer
+    generateWalls()
+    {
+        // 2d arrays
+        let walls = [];
+        
+        for (let ty =0; ty<1.5 * this.rows; ty++)
+        {
+            // first 4 rows are empty
+            // after that, 3 walls every 3 rows
+            if (this.layers.walls.length + ty >= 5 && (ty + 1) % 3 === 0)
+            {
+                walls.push(this.generateWallRow());
+            }
+            else
+            {
+                walls.push(this.generateEmptyRow(ty))
+            }
+
+        }
+        return walls;
+    }
+
+    generateEmptyRow()
+    {
+        
+        let row = [];
+        for (let tx = 0; tx < this.cols; tx++)
+        {
+            row.push({
+                tx :tx,
+                is_wall: false
+            });
+        }
+        return row;
+    }
+
+    generateWallRow()
+    {
+        // how many gaps
+        let gaps = [];
+
+        for (let i = 0; i < this.helper.getRadInt(1,2); i++)
+        {
+            // how wide the gaps
+            gaps.push({
+                idx: i,
+                width: 2
+            });
+        }
+        //  where is the first gap
+        let min  = 1;
+        let max = this.cols - gaps[0].width -1;
+
+        let tx = this.helper.getRadInt(min, max);
+
+        gaps[0] = this.buildGap(tx, gaps[0].width)
+
+        // where is the second gap
+        if (gaps[1])
+        {
+            tx = this.helper.getRadInt(min, max);
+
+            while (gaps[0].taken.indexOf(tx) >= 0)
+            {
+                tx = this.helper.getRadInt(min, max)
+            }
+
+            gaps[0] = this.buildGap(tx, gaps[1].width)
+        }
+
+        // build the row of walls with gaps
+        return this.buildRow(gaps);
+    }
+
+    buildGap(tx, width)
+    {
+        let gap = {
+            tx : tx, 
+            width : width
+        };
+
+        gap.empty = []
+
+        for (let i= 0; i < width; i++)
+        {
+            gap.empty.push(tx + 1);
+        } 
+
+        gap.taken = [];
+
+        for (let i = -2; i < width+ 2; i++)
+        {
+            gap.taken.push(tx + i)
+        }
+
+        return gap
+    }
+
+    buildRow(gaps)
+    {
+        let row = [];
+
+        // first create wall on all tiles
+         for (let tx =0; tx < this.cols; tx++)
+         {
+             row.push({
+                 tx:tx,
+                 frame : this.frames.walls,
+                 is_wall : true
+             })
+         }
+
+         //delete walls where there are gaps
+         gaps.forEach((el) => {
+             for (let tx = el.tx; tx < el.tx + el.width; tx++)
+             {
+                 if (row[tx])
+                 {
+                     row[tx].is_wall = false;
+                 }
+             }
+         }, this);
+
+         return row;
+    }
+
+    createWalls(walls){
+        let x;
+        let y;
+        let spr;
+
+        // row by row
+        for (let ty = 0; ty < walls.length; ty++)
+        {
+            // col by col
+            for (let tx=0; tx < walls[ty].length; tx++)
+            {
+                // pixel position of wall sprite
+                 x = (tx * this.CONFIG.tile) + this.CONFIG.map_offset
+                 y = (ty + this.layers.walls.length) * this.CONFIG.tile
+
+                 if (walls[ty][tx].is_wall)
+                 {
+                     spr = this.ctx.add.sprite(x,y, 'obstacle1')
+                     spr.setOrigin(0);
+                     spr.setDepth(this.DEPTH.wall)
+                     spr.setFrame(this.helper.getRadInt(155,158))
+
+                     walls[ty][tx].spr = spr;
+                 }
+            }
+        }
+
+        return walls
+    }
+
 
     // Floor layer ================================================================
     createFloor() {

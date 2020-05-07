@@ -18,6 +18,7 @@ class Preload extends Phaser.Scene {
         this.load.setPath(this.URL + 'assets/img')
         this.load.spritesheet('tileset', 'Outz-A2.png', {frameWidth:32, frameHeight:32,endFrame:4, margin: 2, spacing: 1})
         this.load.spritesheet('spr-cat', 'spr-cat.png', {frameWidth:30, frameHeight:30,endFrame:2, margin: 2, spacing: 1})
+        this.load.spritesheet('obstacle1', 'obstacle1.png', {frameWidth:31, frameHeight:31,endFrame:238, margin: 1, spacing: 1})
     }
 
     create(){

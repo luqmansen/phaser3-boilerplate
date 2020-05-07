@@ -101,7 +101,7 @@ class Play extends Phaser.Scene{
         this.player = new Player(
             this,
             this.CONFIG.centerX,
-            this.CONFIG.centerY,
+            0.5 * this.CONFIG.tile,
             'spr-cat'
         );
 
