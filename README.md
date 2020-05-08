@@ -1,4 +1,4 @@
-# wandering-chonk
-Web based game built with Phaser 3
+# Phaser 3 game boilerplate
+This boilerplate setup for my development preference.
 
 
