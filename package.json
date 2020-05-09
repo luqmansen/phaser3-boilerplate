@@ -7,9 +7,11 @@
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
     "babel-loader": "^8.0.6",
+    "cache-loader": "^4.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "parallel-webpack": "^2.6.0",
     "raw-loader": "^3.1.0",
     "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.41.2",
@@ -21,8 +23,8 @@
     "phaser": "^3.20.1"
   },
   "scripts": {
-    "build": "webpack --config webpack/prod.js ",
-    "start": "webpack-dev-server --config webpack/base.js --open"
+    "build": "parallel-webpack -p=8 --config=webpack/prod.js",
+    "start": "webpack-dev-server --config webpack/base.js --hot"
   },
   "repository": {
     "type": "git",

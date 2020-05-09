@@ -7,7 +7,6 @@ export default class PhaserText {
 
         this.style = this.initStyle(style);
         this.origin = this.initOrigin(origin);
-
         this._x = x;
         this._y = y;
         this._string = string;
