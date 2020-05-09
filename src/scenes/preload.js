@@ -1,22 +1,22 @@
+import Phaser from 'phaser'
+import CONFIG from '../config/config'
+import PhaserText from '../prefabs/PhaserText'
 
-class Preload extends Phaser.Scene {
+export default class Preload extends Phaser.Scene {
 
     constructor() {
         super({key: 'Preload', active: false})
     }
 
     init(){
-        this.URL = this.sys.game.URL
-        this.CONFIG = this.sys.game.CONFIG
+        // this.URL = this.sys.game.URL
+        this.CONFIG = CONFIG
     }
 
     preload(){
         this.createBackground();
         this.createLoadingBar()
 
-        // Spritesheets
-        this.load.setPath(this.URL + 'src/assets/img')
-        this.load.spritesheet('spr-cat', 'spr-cat.png', {frameWidth:16, frameHeight:16,endFrame:4, margin: 1, spacing: 2})
     }
 
     create(){
